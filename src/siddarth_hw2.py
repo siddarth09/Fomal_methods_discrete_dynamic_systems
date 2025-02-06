@@ -111,7 +111,7 @@ class BuchiAutomaton:
         
                 
 def main():
-    file_path='specification4.txt'
+    file_path='specification1.txt'
     buchi=BuchiAutomaton(file_path) 
     buchi.plot()
     # accepting_states=int(input("Enter the number of accepting states you want:"))
