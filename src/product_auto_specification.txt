@@ -1,0 +1,18 @@
+never { /* Fr2 & G(!o1 & (!r2 | Fr1)) */
+T0_init:
+  if
+  :: ((!(o1)) && (!(r2))) -> goto T0_init
+  :: ((!(o1)) && (r1) && (r2)) -> goto accept_S1
+  :: ((!(o1)) && (!(r1)) && (r2)) -> goto T0_S2
+  fi;
+accept_S1:
+  if
+  :: (((!(o1)) && (!(r2))) || ((!(o1)) && (r1))) -> goto accept_S1
+  :: ((!(o1)) && (!(r1)) && (r2)) -> goto T0_S2
+  fi;
+T0_S2:
+  if
+  :: ((!(o1)) && (r1)) -> goto accept_S1
+  :: ((!(o1)) && (!(r1))) -> goto T0_S2
+  fi;
+}
