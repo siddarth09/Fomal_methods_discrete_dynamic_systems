@@ -1,0 +1,52 @@
+never { /* Fr1 & G((!r1 | Fr2) & (!r2 | Fr3)) */
+T0_init:
+  if
+  :: (((!(r1)) && (!(r2))) || ((!(r1)) && (r3))) -> goto T0_init
+  :: ((r1) && (r2) && (r3)) -> goto accept_S1
+  :: ((!(r1)) && (r2) && (!(r3))) -> goto T0_S2
+  :: ((r1) && (!(r2))) -> goto T0_S3
+  :: ((r1) && (r2) && (!(r3))) -> goto T0_S4
+  fi;
+accept_S1:
+  if
+  :: (((!(r1)) && (!(r2))) || ((r2) && (r3))) -> goto accept_S1
+  :: ((r1) && (!(r2))) -> goto T0_S3
+  :: ((r2) && (!(r3))) -> goto T0_S4
+  fi;
+T0_S2:
+  if
+  :: ((!(r1)) && (r3)) -> goto T0_init
+  :: ((r1) && (r2) && (r3)) -> goto accept_S1
+  :: ((!(r1)) && (!(r3))) -> goto T0_S2
+  :: ((r1) && (!(r2)) && (r3)) -> goto T0_S3
+  :: ((r1) && (r2) && (!(r3))) -> goto T0_S4
+  :: ((r1) && (!(r2)) && (!(r3))) -> goto T0_S5
+  fi;
+T0_S3:
+  if
+  :: ((r2) && (r3)) -> goto accept_S1
+  :: (!(r2)) -> goto T0_S3
+  :: ((r2) && (!(r3))) -> goto accept_S6
+  fi;
+T0_S4:
+  if
+  :: (((!(r1)) && (r3)) || ((r2) && (r3))) -> goto accept_S1
+  :: ((r1) && (!(r2)) && (r3)) -> goto T0_S3
+  :: (((!(r1)) && (!(r3))) || ((r2) && (!(r3)))) -> goto T0_S4
+  :: ((r1) && (!(r2)) && (!(r3))) -> goto T0_S5
+  fi;
+T0_S5:
+  if
+  :: ((r2) && (r3)) -> goto accept_S1
+  :: ((!(r2)) && (r3)) -> goto T0_S3
+  :: ((r2) && (!(r3))) -> goto T0_S4
+  :: ((!(r2)) && (!(r3))) -> goto T0_S5
+  fi;
+accept_S6:
+  if
+  :: (((!(r1)) && (r3)) || ((r2) && (r3))) -> goto accept_S1
+  :: ((r1) && (!(r2)) && (r3)) -> goto T0_S3
+  :: (((!(r1)) && (!(r3))) || ((r2) && (!(r3)))) -> goto T0_S4
+  :: ((r1) && (!(r2)) && (!(r3))) -> goto T0_S5
+  fi;
+}
