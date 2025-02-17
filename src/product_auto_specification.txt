@@ -1,18 +1,11 @@
-never { /* Fr2 & G(!o1 & (!r2 | Fr1)) */
+never { /* F(r1 & r2) & G(!o1 & !r2Ur1) */
 T0_init:
   if
-  :: ((!(o1)) && (!(r2))) -> goto T0_init
-  :: ((!(o1)) && (r1) && (r2)) -> goto accept_S1
-  :: ((!(o1)) && (!(r1)) && (r2)) -> goto T0_S2
+  :: ((!(o1)) && (r1) && (r2) && (!(r2Ur1))) -> goto accept_S0
+  :: (((!(o1)) && (!(r1)) && (!(r2Ur1))) || ((!(o1)) && (!(r2)) && (!(r2Ur1)))) -> goto T0_init
   fi;
-accept_S1:
+accept_S0:
   if
-  :: (((!(o1)) && (!(r2))) || ((!(o1)) && (r1))) -> goto accept_S1
-  :: ((!(o1)) && (!(r1)) && (r2)) -> goto T0_S2
-  fi;
-T0_S2:
-  if
-  :: ((!(o1)) && (r1)) -> goto accept_S1
-  :: ((!(o1)) && (!(r1))) -> goto T0_S2
+  :: ((!(o1)) && (!(r2Ur1))) -> goto accept_S0
   fi;
 }
